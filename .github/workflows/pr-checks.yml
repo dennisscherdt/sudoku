@@ -1,0 +1,39 @@
+name: PR Checks
+
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    checks:
+        name: Lint, Typecheck, Test
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.14"
+                  cache: "pip"
+
+            - name: Install dependencies
+              run: |
+                  python -m venv .venv
+                  .venv/bin/pip install --upgrade pip
+                  .venv/bin/pip install -e .[dev]
+
+            - name: Run Ruff (lint)
+              run: |
+                  .venv/bin/ruff check .
+
+            - name: Run mypy (type check)
+              run: |
+                  .venv/bin/mypy src
+
+            - name: Run pytest
+              run: |
+                  .venv/bin/pytest
