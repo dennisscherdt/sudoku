@@ -31,3 +31,15 @@ select = [
 [tool.ruff.format]
 quote-style = 'single'
 docstring-code-format = true
+
+[tool.mypy]
+python_version = "3.14"
+
+strict = true
+warn_unused_configs = true
+
+pretty = true
+show_error_codes = true
+
+explicit_package_bases = true
+namespace_packages = false
