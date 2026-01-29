@@ -1,7 +1,15 @@
 [project]
-name = "my-project"
+name = "sudoku"
 version = "0.1.0"
 requires-python = ">=3.14"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+    "python-dotenv",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
