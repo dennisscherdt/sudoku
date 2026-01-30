@@ -1,6 +1,6 @@
 import pytest
 
-from engine.sudoku import Sudoku
+from engine.sudoku import GRID_SIZE, Sudoku
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def invalid_grid(valid_grid):
 
 @pytest.fixture
 def invalid_grid_bad_row_length():
-    sudoku = [[0] * 9 for _ in range(9)]
+    sudoku = [[0] * GRID_SIZE for _ in range(GRID_SIZE)]
     sudoku[0] = [0] * 8
     return sudoku
 
@@ -48,8 +48,8 @@ def test_sudoku_init_invalid(invalid_grid_bad_row_length):
 def test_create_empty_grid():
     sudoku = Sudoku.empty()
 
-    assert len(sudoku.grid) == 9
-    assert all(len(row) == 9 for row in sudoku.grid)
+    assert len(sudoku.grid) == GRID_SIZE
+    assert all(len(row) == GRID_SIZE for row in sudoku.grid)
     for row in sudoku.grid:
         assert all(cell == 0 for cell in row)
 

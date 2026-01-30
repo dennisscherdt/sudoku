@@ -14,7 +14,7 @@ class Sudoku:
 
     @classmethod
     def empty(cls) -> Sudoku:
-        return cls([[0] * GRID_SIZE for _ in range(9)])
+        return cls([[0] * GRID_SIZE for _ in range(GRID_SIZE)])
 
     @staticmethod
     def determine_subgrid(row: int, col: int):
