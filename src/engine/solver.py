@@ -1,3 +1,5 @@
+from random import shuffle
+
 from engine.sudoku import Sudoku
 
 
@@ -29,7 +31,13 @@ class Solver:
 
             row, col = pos
 
-            for n in range(1, 10):
+            def generate_random_list():
+                """Prevents identical solutions on each call with the same starting grid values"""
+                nums = list(range(1, 10))
+                shuffle(nums)
+                return nums
+
+            for n in generate_random_list():
                 sudoku.set_cell(row=row, col=col, val=n)
                 if sudoku.is_valid_board():
                     if backtrack():
