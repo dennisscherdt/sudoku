@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing import Annotated
 
 SudokuGrid = Annotated[list[list[int]], '9x9 grid']
@@ -60,3 +61,6 @@ class Sudoku:
                 subgrids[subgrid_i].add(cell)
 
         return True
+
+    def copy(self) -> Sudoku:
+        return Sudoku(deepcopy(self.grid))
