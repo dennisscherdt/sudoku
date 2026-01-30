@@ -64,3 +64,6 @@ class Sudoku:
 
     def copy(self) -> Sudoku:
         return Sudoku(deepcopy(self.grid))
+
+    def __str__(self) -> str:
+        return '\n'.join(' '.join(str(c) for c in row) for row in self.grid)
