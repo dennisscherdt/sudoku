@@ -28,6 +28,8 @@ class Generator:
         empty = Sudoku.empty()
 
         solved = self.solver.solve(empty)
+        if solved is None:
+            raise RuntimeError('Solver failed to solve an empty Sudoku')
 
         puzzle = solved.copy()
         cell_mask = self._generate_randomized_matrix(difficulty=difficulty)

@@ -15,7 +15,7 @@ class Solver:
         grid = sudoku.grid
         size = len(grid)
 
-        def find_empty_cell():
+        def find_empty_cell() -> list[int] | None:
             for row in range(size):
                 for col in range(size):
                     cell = grid[row][col]
@@ -24,14 +24,14 @@ class Solver:
 
             return None
 
-        def backtrack():
+        def backtrack() -> bool:
             pos = find_empty_cell()
             if pos is None:
                 return True
 
             row, col = pos
 
-            def generate_random_list():
+            def generate_random_list() -> list[int]:
                 """Prevents identical solutions on each call with the same starting grid values"""
                 nums = list(range(1, 10))
                 shuffle(nums)

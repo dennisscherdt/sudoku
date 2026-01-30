@@ -18,10 +18,10 @@ class Sudoku:
         return cls([[0] * GRID_SIZE for _ in range(GRID_SIZE)])
 
     @staticmethod
-    def determine_subgrid(row: int, col: int):
+    def determine_subgrid(row: int, col: int) -> int:
         return (row // 3) * 3 + (col // 3)
 
-    def set_cell(self, row: int, col: int, val: int):
+    def set_cell(self, row: int, col: int, val: int) -> None:
         if not (0 <= val <= GRID_SIZE):
             raise ValueError('Invalid cell input')
 
@@ -40,7 +40,7 @@ class Sudoku:
 
         self.grid[row][col] = val
 
-    def is_valid_board(self):
+    def is_valid_board(self) -> bool:
         rows: list[set[int]] = [set() for _ in range(GRID_SIZE)]
         cols: list[set[int]] = [set() for _ in range(GRID_SIZE)]
         subgrids: list[set[int]] = [set() for _ in range(GRID_SIZE)]
