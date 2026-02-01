@@ -19,9 +19,8 @@ class Solver:
             for row in range(size):
                 for col in range(size):
                     cell = grid[row][col]
-                    if cell == 0:
+                    if cell.value == 0:
                         return [row, col]
-
             return None
 
         def backtrack() -> bool:
@@ -39,9 +38,11 @@ class Solver:
 
             for n in generate_random_list():
                 sudoku.set_cell(row=row, col=col, val=n)
+
                 if sudoku.is_valid_board():
                     if backtrack():
                         return True
+
                 sudoku.set_cell(row=row, col=col, val=0)
 
             return False

@@ -1,11 +1,11 @@
 import pytest
 
-from engine.sudoku import GRID_SIZE, Sudoku
+from engine.sudoku import GRID_SIZE, Cell, Sudoku
 
 
 @pytest.fixture
 def valid_grid():
-    return [
+    raw = [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
         [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -17,18 +17,20 @@ def valid_grid():
         [0, 0, 0, 0, 8, 0, 0, 7, 9],
     ]
 
+    return [[Cell(value=v) for v in row] for row in raw]
+
 
 @pytest.fixture
 def invalid_grid(valid_grid):
     grid = [row[:] for row in valid_grid]
-    grid[0][8] = 9
+    grid[0][8].value = 9
     return grid
 
 
 @pytest.fixture
 def invalid_grid_bad_row_length():
-    sudoku = [[0] * GRID_SIZE for _ in range(GRID_SIZE)]
-    sudoku[0] = [0] * 8
+    sudoku = [Cell(value=0, conflict_count=0) for _ in range(GRID_SIZE) for _ in range(GRID_SIZE)]
+    sudoku[0] = [Cell(value=0, conflict_count=0) for _ in range(GRID_SIZE - 1)]
     return sudoku
 
 
@@ -51,7 +53,7 @@ def test_create_empty_grid():
     assert len(sudoku.grid) == GRID_SIZE
     assert all(len(row) == GRID_SIZE for row in sudoku.grid)
     for row in sudoku.grid:
-        assert all(cell == 0 for cell in row)
+        assert all(cell.value == 0 and cell.conflict_count == 0 for cell in row)
 
 
 # set_cell
@@ -87,7 +89,7 @@ def test_set_cell_same_value_is_noop(valid_grid):
 
     sudoku.set_cell(row=0, col=0, val=5)
 
-    assert sudoku.grid[0][0] == 5
+    assert sudoku.grid[0][0].value == 5
     assert sudoku.empty_cells == original_empty
 
 
@@ -97,7 +99,7 @@ def test_set_cell_clearing_cell_decrements_empty_count(valid_grid):
 
     sudoku.set_cell(row=0, col=0, val=0)
 
-    assert sudoku.grid[0][0] == 0
+    assert sudoku.grid[0][0].value == 0
     assert sudoku.empty_cells == original_empty + 1
 
 
@@ -107,14 +109,15 @@ def test_set_cell_filling_cell_increments_empty_count(valid_grid):
 
     sudoku.set_cell(row=0, col=2, val=4)  # was empty
 
-    assert sudoku.grid[0][2] == 4
+    assert sudoku.grid[0][2].value == 4
     assert sudoku.empty_cells == original_empty - 1
 
 
 def test_set_cell(valid_grid):
     sudoku = Sudoku(valid_grid)
     sudoku.set_cell(val=9, row=4, col=5)
-    assert sudoku.grid[4][5] == 9
+
+    assert sudoku.grid[4][5].value == 9
 
 
 # helpers / validation

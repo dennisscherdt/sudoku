@@ -46,7 +46,7 @@ def test_generate_uses_only_valid_cell_values(generator):
 
     for row in sudoku.grid:
         for cell in row:
-            assert 0 <= cell <= 9
+            assert 0 <= cell.value <= 9
 
 
 def test_generator_does_not_mutate_solver_input(generator):
