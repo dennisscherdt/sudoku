@@ -37,9 +37,11 @@ INVALID_GRID = [
 def assert_clues_preserved(original: Sudoku, solved: Sudoku) -> None:
     for r in range(GRID_SIZE):
         for c in range(GRID_SIZE):
-            val = original.grid[r][c]
-            if val != 0:
-                assert solved.grid[r][c] == val
+            original_cell = original.grid[r][c]
+            solved_cell = solved.grid[r][c]
+
+            if original_cell.value != 0:
+                assert solved_cell.value == original_cell.value
 
 
 def test_solve_solves_empty_board():
