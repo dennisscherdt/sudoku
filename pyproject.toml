@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "sudoku"
 version = "0.1.0"
@@ -15,9 +19,14 @@ dev = [
     "python-dotenv",
 ]
 
+[project.scripts]
+sudoku = "main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/domain", "src/engine", "src/ui", "src/main.py"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
 
 [tool.ruff]
 line-length = 100

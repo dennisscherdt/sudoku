@@ -1,7 +1,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QWidget
 
-from src.domain.constants import GRID_SIZE
+from domain.constants import GRID_SIZE
 
 from .cell import CellWidget
 
