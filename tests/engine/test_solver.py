@@ -1,7 +1,8 @@
 import pytest
 
+from domain.constants import GRID_SIZE
 from engine.solver import Solver
-from engine.sudoku import GRID_SIZE, Sudoku
+from engine.sudoku import Sudoku
 
 PARTIAL_GRID = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],

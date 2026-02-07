@@ -1,6 +1,7 @@
 import pytest
 
-from engine.sudoku import GRID_SIZE, Cell, Sudoku
+from domain.constants import GRID_SIZE
+from engine.sudoku import Cell, Sudoku
 
 # Fixtures
 
