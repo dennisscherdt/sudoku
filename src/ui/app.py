@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ui.widgets import BoardWidget, DifficultyWidget
+from ui.widgets import BoardWidget, DifficultyWidget, GenerateButtonWidget
 
 
 class MainWindow(QMainWindow):
@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
 
         self.board = BoardWidget()
         self.difficulty = DifficultyWidget()
+        self.generate_button = GenerateButtonWidget()
 
         layout.addWidget(self.title)
         layout.addWidget(self.board)
