@@ -1,4 +1,3 @@
-from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QWidget
 
 from domain.constants import GRID_SIZE
@@ -12,11 +11,11 @@ class BoardWidget(QWidget):
 
         self.setFixedSize(300, 300)
 
-        self.grid = QGridLayout(self)
-        self.grid.setSpacing(6)
+        grid = QGridLayout(self)
+        grid.setSpacing(0)
+        grid.setContentsMargins(0, 0, 0, 0)
 
         for row in range(GRID_SIZE):
             for col in range(GRID_SIZE):
-                cell = CellWidget(parent=self)
-                cell.setAlignment(Qt.AlignmentFlag.AlignCenter)
-                self.grid.addWidget(cell, row, col)
+                cell = CellWidget(row, col, parent=self)
+                grid.addWidget(cell, row, col)
