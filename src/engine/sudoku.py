@@ -3,7 +3,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from typing import Annotated
 
-GRID_SIZE = 9
+from domain.constants import GRID_SIZE
 
 
 @dataclass

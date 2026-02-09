@@ -1,8 +1,9 @@
 import pytest
 
+from domain.constants import GRID_SIZE
 from engine.generator import Difficulty, Generator
 from engine.solver import Solver
-from engine.sudoku import GRID_SIZE, Sudoku
+from engine.sudoku import Sudoku
 
 
 @pytest.fixture

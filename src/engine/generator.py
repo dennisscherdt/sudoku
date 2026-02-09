@@ -1,18 +1,8 @@
-from enum import IntEnum
 from random import shuffle
 
+from domain.constants import GRID_SIZE, Difficulty
 from engine.solver import Solver
-from engine.sudoku import GRID_SIZE, Sudoku
-
-
-class Difficulty(IntEnum):
-    """Values define the number of given cells in the puzzle."""
-
-    SUPER_EASY = 50
-    EASY = 40
-    MEDIUM = 30
-    HARD = 20
-    SUPER_HARD = 10
+from engine.sudoku import Sudoku
 
 
 class Generator:
