@@ -12,4 +12,5 @@ class DifficultyWidget(QComboBox):
 
     @property
     def selected_difficulty(self) -> Difficulty:
-        return self.currentData()
+        difficulty: Difficulty = self.currentData()
+        return difficulty
