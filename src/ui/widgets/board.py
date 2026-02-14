@@ -64,3 +64,14 @@ class BoardWidget(QWidget):
         cell: CellWidget = self.sender()  # type: ignore[assignment]
         value = int(text) if text else 0
         self.sudoku.set_cell(row=cell.row, col=cell.col, val=value)
+        self._refresh_conflicts()
+
+    def _refresh_conflicts(self) -> None:
+        if self.sudoku is None:
+            return
+
+        for row in range(GRID_SIZE):
+            for col in range(GRID_SIZE):
+                engine_cell = self.sudoku.grid[row][col]
+                ui_cell = self.cells[row][col]
+                ui_cell.set_conflict(has_conflict=engine_cell.conflict_count > 0)

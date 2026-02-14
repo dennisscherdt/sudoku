@@ -44,7 +44,7 @@ class CellWidget(QLineEdit):
         elif row == last and col == last:
             radius = f'border-bottom-right-radius: {CORNER_RADIUS};'
 
-        self.setStyleSheet(f"""
+        self._base_stylesheet = f"""
             QLineEdit {{
                 font-size: 16px;
                 border-top: {top} solid {BORDER_COLOR};
@@ -53,4 +53,16 @@ class CellWidget(QLineEdit):
                 border-right: {right} solid {BORDER_COLOR};
                 {radius}
             }}
-        """)
+        """
+        self.setStyleSheet(self._base_stylesheet)
+
+    def set_conflict(self, has_conflict: bool) -> None:
+        if has_conflict:
+            self.setStyleSheet(
+                self._base_stylesheet
+                + """
+                QLineEdit { background-color: #ffcccc; }
+            """
+            )
+        else:
+            self.setStyleSheet(self._base_stylesheet)
