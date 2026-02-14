@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Slot
 from PySide6.QtWidgets import (
     QLabel,
     QMainWindow,
@@ -45,6 +45,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.difficulty)
         layout.addWidget(self.generate_button)
 
+    @Slot()
     def _on_generate(self) -> None:
         difficulty = self.difficulty.selected_difficulty
         puzzle = self.generator.generate(difficulty)

@@ -1,3 +1,4 @@
+from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QWidget
 
 from domain.constants import GRID_SIZE
@@ -51,6 +52,7 @@ class BoardWidget(QWidget):
                     cell.clear()
                     cell.setReadOnly(False)
 
+    @Slot(str)
     def _on_cell_changed(self, text: str) -> None:
         """
         Used to call Sudoku.set_cell with the row, col, and val of the cell
