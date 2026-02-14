@@ -14,6 +14,9 @@ class CellWidget(QLineEdit):
     def __init__(self, row: int, col: int, parent: QWidget | None = None):
         super().__init__(parent)
 
+        self.row = row
+        self.col = col
+
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setMaxLength(1)
 
